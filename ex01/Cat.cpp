@@ -37,10 +37,9 @@ Cat::~Cat()
 
 Cat &Cat::operator=(Cat const &src)
 {
-	std::cout << "Cat assignation operator called" << std::endl;
 	if (this != &src)
 	{
-		_type = src._type;
+		this->_type = src._type;
 		this->_brain = new Brain();
 		if (!this->_brain)
 		{

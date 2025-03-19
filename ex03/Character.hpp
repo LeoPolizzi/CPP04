@@ -17,12 +17,14 @@
 # include <string>
 
 # define INVENTORY_CAPACITY 4
+# define FLOOR_CAPACITY 50
 
 class Character : public ICharacter
 {
   private:
 	std::string _name;
 	AMateria *_inventory[INVENTORY_CAPACITY];
+	AMateria *_floor[FLOOR_CAPACITY];
 
   public:
 	Character(std::string const &name);

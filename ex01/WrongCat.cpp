@@ -28,11 +28,10 @@ WrongCat::~WrongCat()
 	std::cout << "WrongCat destructor called" << std::endl;
 }
 
-WrongCat &WrongCat::operator=(WrongCat const &rhs)
+WrongCat &WrongCat::operator=(WrongCat const &src)
 {
-	std::cout << "WrongCat assignation operator called" << std::endl;
-	if (this != &rhs)
-		this->_type = rhs._type;
+	if (this != &src)
+		this->_type = src._type;
 	return (*this);
 }
 

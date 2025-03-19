@@ -30,7 +30,6 @@ Brain::~Brain()
 
 Brain &Brain::operator=(const Brain &src)
 {
-	std::cout << "Brain assignation operator called" << std::endl;
 	for (size_t i = 0; i < 100; i++)
 		this->_ideas[i] = src.getIdea(i);
 	return (*this);

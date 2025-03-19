@@ -16,41 +16,51 @@ Character::Character(std::string const &name) : _name(name)
 {
 	std::cout << "Character named " << this->_name << " created" << std::endl;
 	for (int i = 0; i < INVENTORY_CAPACITY; i++)
-		_inventory[i] = NULL;
+		this->_inventory[i] = NULL;
+	for (int i = 0; i < FLOOR_CAPACITY; i++)
+		this->_floor[i] = NULL;
 }
 
 Character::Character(Character const &src)
 {
 	std::cout << "Character copy constructor called" << std::endl;
-	_name = src._name;
+	this->_name = src._name;
 	for (int i = 0; i < INVENTORY_CAPACITY; i++)
 		if (src._inventory[i])
-			_inventory[i] = src._inventory[i]->clone();
+			this->_inventory[i] = src._inventory[i]->clone();
 		else
-			_inventory[i] = NULL;
+			this->_inventory[i] = NULL;
+	for (int i = 0; i < FLOOR_CAPACITY; i++)
+		if (src._floor[i])
+			this->_floor[i] = src._floor[i]->clone();
+		else
+			this->_floor[i] = NULL;
 }
 
 Character::~Character()
 {
 	std::cout << "Character destructor called" << std::endl;
 	for (int i = 0; i < INVENTORY_CAPACITY; i++)
-		if (_inventory[i])
-			delete	_inventory[i];
+		if (this->_inventory[i])
+			delete	this->_inventory[i];
+	for (int i = 0; i < FLOOR_CAPACITY; i++)
+		if (this->_floor[i])
+			delete this->_floor[i];
 }
 
 Character &Character::operator=(Character const &src)
 {
 	if (this != &src)
 	{
-		_name = src._name;
+		this->_name = src._name;
 		for (int i = 0; i < INVENTORY_CAPACITY; i++)
 		{
-			if (_inventory[i])
-				delete	_inventory[i];
+			if (this->_inventory[i])
+				delete	this->_inventory[i];
 			if (src._inventory[i])
-				_inventory[i] = src._inventory[i]->clone();
+				this->_inventory[i] = src._inventory[i]->clone();
 			else
-				_inventory[i] = NULL;
+				this->_inventory[i] = NULL;
 		}
 	}
 	return (*this);
@@ -65,7 +75,7 @@ void Character::equip(AMateria *materia)
 {
 	for (int i = 0; i < INVENTORY_CAPACITY; i++)
 	{
-		if (!_inventory[i])
+		if (!this->_inventory[i])
 		{
 			this->_inventory[i] = materia;
 			std::cout << "Materia " << materia->getType() << " equipped at slot " << i << std::endl;
@@ -79,6 +89,12 @@ void Character::unequip(int index)
 {
 	if (index >= 0 && index < INVENTORY_CAPACITY && this->_inventory[index])
 	{
+		for (int i = 0; i < FLOOR_CAPACITY; i++)
+			if (!this->_floor[i])
+			{
+				this->_floor[i] = this->_inventory[index];
+				break ;
+			}
 		this->_inventory[index] = NULL;
 		std::cout << "Materia unequipped from slot " << index << std::endl;
 		return ;

@@ -40,7 +40,7 @@ Dog &Dog::operator=(Dog const &src)
 	std::cout << "Dog assignation operator called" << std::endl;
 	if (this != &src)
 	{
-		_type = src._type;
+		this->_type = src._type;
 		this->_brain = new Brain();
 		if (!this->_brain)
 		{

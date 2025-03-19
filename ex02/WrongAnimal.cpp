@@ -37,13 +37,13 @@ WrongAnimal &WrongAnimal::operator=(WrongAnimal const &src)
 {
 	std::cout << "WrongAnimal assignation operator called" << std::endl;
 	if (this != &src)
-		_type = src._type;
+		this->_type = src._type;
 	return (*this);
 }
 
 std::string WrongAnimal::getType() const
 {
-	return (_type);
+	return (this->_type);
 }
 
 void WrongAnimal::makeSound() const

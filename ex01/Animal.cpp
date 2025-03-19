@@ -35,15 +35,14 @@ Animal::~Animal()
 
 Animal &Animal::operator=(Animal const &src)
 {
-	std::cout << "Animal assignation operator called" << std::endl;
 	if (this != &src)
-		_type = src._type;
-	return *this;
+		this->_type = src._type;
+	return (*this);
 }
 
 std::string Animal::getType() const
 {
-	return _type;
+	return (this->_type);
 }
 
 void Animal::makeSound() const
